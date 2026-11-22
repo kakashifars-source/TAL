@@ -1,0 +1,14 @@
+{
+  "name": "tal-ems",
+  "private": true,
+  "scripts": {
+    "install:all": "npm --prefix server install && npm --prefix client install",
+    "build": "npm --prefix client run build",
+    "setup": "npm --prefix server run setup",
+    "demo:seed": "npm --prefix server run demo:seed",
+    "demo:clear": "npm --prefix server run demo:clear",
+    "dev:server": "npm --prefix server run dev",
+    "dev:client": "npm --prefix client run dev",
+    "start": "npm --prefix server start"
+  }
+}

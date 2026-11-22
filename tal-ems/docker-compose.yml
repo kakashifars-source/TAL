@@ -1,0 +1,23 @@
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: tal_ems
+      POSTGRES_USER: tal
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?set DB_PASSWORD in .env}
+    volumes: [pgdata:/var/lib/postgresql/data]
+  app:
+    build: .
+    restart: unless-stopped
+    depends_on: [db]
+    env_file: ./server/.env
+    environment:
+      DATABASE_URL: postgres://tal:${DB_PASSWORD}@db:5432/tal_ems
+      UPLOAD_DIR: /data/uploads
+      BACKUP_DIR: /data/backups
+    volumes: [appdata:/data]
+    ports: ["4000:4000"]
+volumes:
+  pgdata:
+  appdata:
